@@ -7,7 +7,10 @@ import time as t
 # Display GUI
 physicsClient = p.connect(p.GUI)
 
-# Read in box
+# Add gravitational force
+p.setGravity(0,0,-9.8)
+
+# Import box
 p.loadSDF("box.sdf")
 
 # Create loop to make GUI visibe for ~16 seconds
