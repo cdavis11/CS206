@@ -3,15 +3,21 @@
 
 import pybullet as p
 import time as t
+import pybullet_data
 
 # Display GUI
 physicsClient = p.connect(p.GUI)
 
+p.setAdditionalSearchPath(pybullet_data.getDataPath())
+
 # Add gravitational force
 p.setGravity(0,0,-9.8)
 
+# Add floor
+planeId = p.loadURDF("plane.urdf")
+
 # Import box
-p.loadSDF("box.sdf")
+p.loadSDF("boxes.sdf")
 
 # Create loop to make GUI visibe for ~16 seconds
 for i in range (0, 1000):
