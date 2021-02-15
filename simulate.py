@@ -16,8 +16,11 @@ p.setGravity(0,0,-9.8)
 # Add floor
 planeId = p.loadURDF("plane.urdf")
 
+# Simulate robot
+bodyId = p.loadURDF("body.urdf")
+
 # Import box
-p.loadSDF("boxes.sdf")
+p.loadSDF("world.sdf")
 
 # Create loop to make GUI visibe for ~16 seconds
 for i in range (0, 1000):
