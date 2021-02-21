@@ -27,20 +27,25 @@ p.loadSDF("world.sdf")
 
 pyrosim.Prepare_To_Simulate("body.urdf")
 
-# Create vector filled with 0s
-backLegSensorValues = np.zeros(1000)
+# Create vectors filled with 0s
+backLegSensorValues = np.zeros(100)
+frontLegSensorValues = np.zeros(100)
+
 # Create loop to make GUI visibe for ~16 seconds
-for i in range (0, 1000):
+for i in range (0, 100):
     p.stepSimulation()
-    # Add sensor to back leg
+    # Add sensor to back and front leg
     backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
+    frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
     t.sleep(1/60)
 
 # Save sensor values
-np.save(os.path.join('data','backLegSensorValues.npy'), backLegSensorValues)
+np.save('data/backLegSensorValues.npy', backLegSensorValues)
+np.save('data/frontLegSensorValues.npy', frontLegSensorValues)
 
 # Close GUI
 p.disconnect()
 
 # Print values
 print(backLegSensorValues)
+print(frontLegSensorValues)
