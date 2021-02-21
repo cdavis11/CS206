@@ -7,7 +7,7 @@ def Create_World():
     # Define box coordinates
     x = -2
     y = -2
-    z = 0.5
+    z = 0.5 a 
 
     # Define box dimensions
     length = 1
