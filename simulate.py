@@ -7,6 +7,15 @@ import pybullet_data
 import pyrosim.pyrosim as pyrosim
 import numpy as np
 import math
+import random
+
+# Initialize variables
+amplitude1 = math.pi/5
+frequency1 = 10
+phaseOffset1 = 0
+amplitude2 = math.pi/4
+frequency2 = 10
+phaseOffset2 = math.pi/4
 
 # Display GUI
 physicsClient = p.connect(p.GUI)
@@ -31,6 +40,12 @@ pyrosim.Prepare_To_Simulate("body.urdf")
 backLegSensorValues = np.zeros(1000)
 frontLegSensorValues = np.zeros(1000)
 
+# Create sinusoidal vector
+targetAngles1 = amplitude1*np.sin(frequency1*(np.linspace(-math.pi, math.pi, 1000)) + phaseOffset1)
+targetAngles2 = amplitude2*np.sin(frequency2*(np.linspace(-math.pi, math.pi, 1000)) + phaseOffset2)
+np.save('data/targetAngleValuesBackLeg.npy', targetAngles1)
+np.save('data/targetAngleValuesFrontLeg.npy', targetAngles2)
+
 # Create loop to make GUI visibe for ~16 seconds
 for i in range (0, 1000):
     p.stepSimulation()
@@ -39,10 +54,10 @@ for i in range (0, 1000):
     frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
     # Simulate motor
     pyrosim.Set_Motor_For_Joint(bodyIndex = robot, jointName = "Torso_BackLeg", controlMode = p.POSITION_CONTROL,
-                                targetPosition = -math.pi/6.0, maxForce = 500)
+                                targetPosition = targetAngles1[i], maxForce = 500)
     pyrosim.Set_Motor_For_Joint(bodyIndex = robot, jointName = "Torso_FrontLeg", controlMode = p.POSITION_CONTROL,
-                                targetPosition = math.pi/6.0, maxForce = 500)
-    t.sleep(1/100)
+                                targetPosition = targetAngles2[i], maxForce = 500)
+    t.sleep(1/240)
 
 # Save sensor values
 np.save('data/backLegSensorValues.npy', backLegSensorValues)
