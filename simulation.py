@@ -1,5 +1,6 @@
 from world import WORLD
 from robot import ROBOT
+from sensor import SENSOR
 import pybullet as p
 import time as t
 import pybullet_data
@@ -28,9 +29,8 @@ class SIMULATION:
         # Create loop to make GUI visibe for ~16 seconds
         for i in range (0, 1000):
             p.stepSimulation()
-##            # Add sensor to back and front leg
-##            backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
-##            frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
+            self.robot.Sense(i)
+            
 ##            # Simulate motor
 ##            pyrosim.Set_Motor_For_Joint(bodyIndex = robot, jointName = "Torso_BackLeg", controlMode = p.POSITION_CONTROL,
 ##                                        targetPosition = targetAngles1[i], maxForce = 500)
