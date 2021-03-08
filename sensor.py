@@ -13,8 +13,7 @@ class SENSOR:
     def Get_Value(self,x):
         # Add sensor to back and front leg
         self.values[x] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
-        if self.values[-1] != 0:
-            print(self.values)
+
 
     
         

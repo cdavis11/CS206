@@ -22,11 +22,6 @@ simulation.Run()
 ##frequency2 = c.freq2
 ##phaseOffset2 = c.phase2
 
-
-### Create vectors filled with 0s
-##backLegSensorValues = np.zeros(1000)
-##frontLegSensorValues = np.zeros(1000)
-##
 ### Create sinusoidal vector
 ##targetAngles1 = amplitude1*np.sin(frequency1*(np.linspace(-math.pi, math.pi, 1000)) + phaseOffset1)
 ##targetAngles2 = amplitude2*np.sin(frequency2*(np.linspace(-math.pi, math.pi, 1000)) + phaseOffset2)
@@ -39,8 +34,6 @@ simulation.Run()
 ##np.save('data/backLegSensorValues.npy', backLegSensorValues)
 ##np.save('data/frontLegSensorValues.npy', frontLegSensorValues)
 ##
-### Close GUI
-##p.disconnect()
 ##
 ### Print values
 ##print(backLegSensorValues)
