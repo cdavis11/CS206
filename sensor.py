@@ -14,6 +14,11 @@ class SENSOR:
         # Add sensor to back and front leg
         self.values[x] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
 
+    def Save_Values(self):
+        # Save sensor values
+        np.save('data/SensorValues.npy', self.values)
+
+
 
     
         
