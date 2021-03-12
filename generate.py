@@ -7,7 +7,7 @@ def Create_World():
     # Define box coordinates
     x = -2
     y = -2
-    z = 0.5 a 
+    z = 0.5
 
     # Define box dimensions
     length = 1
@@ -20,6 +20,10 @@ def Create_World():
     pyrosim.End()
 
 def Create_Robot():
+    pass
+    
+    
+def Generate_Body():
     pyrosim.Start_URDF("body.urdf")
     # Define Torso, Relative Leg coordinates
     x = 1.5
@@ -49,5 +53,15 @@ def Create_Robot():
     pyrosim.Send_Cube(name="FrontLeg", pos=[xr, yr, zr] , size=[length, width, height])
     pyrosim.End()
 
+def Generate_Brain():
+    pyrosim.Start_NeuralNetwork("brain.nndf")
+    pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
+    pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "BackLeg")
+    pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "FrontLeg")
+
+    pyrosim.End()
+    
 Create_World()
 Create_Robot()
+Generate_Body()
+Generate_Brain()
