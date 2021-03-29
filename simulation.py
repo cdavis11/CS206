@@ -33,7 +33,7 @@ class SIMULATION:
             self.robot.Think()
             self.robot.Act(i)
          
-            t.sleep(1/240)
+            #t.sleep(1/240)
             #print(i)
 
     def Get_Fitness(self):
