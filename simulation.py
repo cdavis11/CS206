@@ -9,9 +9,13 @@ import pyrosim.pyrosim as pyrosim
 class SIMULATION:
 
     # Initializer
-    def __init__(self):
-        # Display GUI
-        self.physicsClient = p.connect(p.GUI)
+    def __init__(self, directOrGUI):
+        if directOrGUI == "DIRECT":
+            p.connect(p.DIRECT)
+        else:
+            # Display GUI
+            self.physicsClient = p.connect(p.GUI)
+
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
         #Add gravitational force

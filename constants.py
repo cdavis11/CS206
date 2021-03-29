@@ -6,4 +6,4 @@ phase1 = 0
 amp2 = math.pi/4
 freq2 = 3
 phase2 = 0
-numberOfGenerations = 2
+numberOfGenerations = 10
