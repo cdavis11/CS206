@@ -35,3 +35,6 @@ class SIMULATION:
          
             t.sleep(1/240)
             #print(i)
+
+    def Get_Fitness(self):
+        self.robot.Get_Fitness()
