@@ -5,17 +5,23 @@ import random
 
 class SOLUTION:
 
-    def __init__(self):
+    def __init__(self,nextAvailableID):
+        self.myID = nextAvailableID
         self.weights = np.random.rand(3,2)
         self.weights = self.weights *2 -1
+
+    def Set_ID(self, nextAvailableID):
+        self.myID = nextAvailableID
        
     def Evaluate(self, directORGUI):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system('python simulate.py ' + directORGUI)
+        
+        os.system("python simulate.py " + directORGUI + " " + str(self.myID) + " &")
         f = open("fitness.txt", "r")
         self.fitness = float(f.read())
+        f.close()
 
     def Create_World(self):
         # Create box.sdf file
@@ -65,7 +71,7 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork("brain"+str(self.myID)+".nndf")
         pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "BackLeg")
         pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "FrontLeg")

@@ -6,9 +6,10 @@ import sys
 
 # Get command line input
 directOrGUI = sys.argv[1]
+solutionID = sys.argv[2]
 
 # Pass direct or GUI into Simulation's constructor
-simulation = SIMULATION(directOrGUI)
+simulation = SIMULATION(directOrGUI,solutionID)
 simulation.Run()
 simulation.Get_Fitness()
 

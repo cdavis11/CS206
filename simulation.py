@@ -9,7 +9,8 @@ import pyrosim.pyrosim as pyrosim
 class SIMULATION:
 
     # Initializer
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionID):
+        self.directOrGUI = directOrGUI
         if directOrGUI == "DIRECT":
             p.connect(p.DIRECT)
         else:
@@ -22,7 +23,7 @@ class SIMULATION:
         p.setGravity(0,0,-9.8)
 
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionID)
 
     # Destructor
     def __del__(self):
@@ -36,9 +37,8 @@ class SIMULATION:
             self.robot.Sense(i)
             self.robot.Think()
             self.robot.Act(i)
-         
-            #t.sleep(1/240)
-            #print(i)
+            #if self.directOrGUI == "GUI":
+                #t.sleep(1/60)
 
     def Get_Fitness(self):
         self.robot.Get_Fitness()
