@@ -1,4 +1,5 @@
 import numpy as np
+import time
 import os
 import pyrosim.pyrosim as pyrosim
 import random
@@ -12,16 +13,20 @@ class SOLUTION:
 
     def Set_ID(self, nextAvailableID):
         self.myID = nextAvailableID
-       
-    def Evaluate(self, directORGUI):
+
+    def Start_Simulation(self, directORGUI):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        
         os.system("python simulate.py " + directORGUI + " " + str(self.myID) + " &")
-        f = open("fitness.txt", "r")
-        self.fitness = float(f.read())
-        f.close()
+
+    def Wait_For_Simulation_To_End(self):
+        while not os.path.exists("fitness" + str(self.myID) + ".txt"):
+            time.sleep(0.01)
+        f = open("fitness" + str(self.myID) + ".txt", "r")
+        self.fitness = (f.read())
+        #print(self.fitness)
+        os.system("rm fitness" + str(self.myID) + ".txt")
 
     def Create_World(self):
         # Create box.sdf file
