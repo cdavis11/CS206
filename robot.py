@@ -1,5 +1,6 @@
 import pybullet as p
 import os
+import constants as c
 import time as t
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
@@ -42,7 +43,7 @@ class ROBOT:
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
-                desiredAngle = self.nn.Get_Value_Of(neuronName)
+                desiredAngle = self.nn.Get_Value_Of(neuronName) * c.motorJointRange
                 for i in self.motors:
                     self.motors[i].Set_Value(desiredAngle, self.robot)
 
@@ -56,10 +57,9 @@ class ROBOT:
         xCoordinateOfLinkZero = positionOfLinkZero[0]
         print(xCoordinateOfLinkZero)
         f = open("tmp" + str(self.solutionID) + ".txt","w")
-        os.system("mv tmp" + str(self.solutionID) + ".txt fitness" + str(self.solutionID) + ".txt")
         f.write(str(xCoordinateOfLinkZero))
         f.close()
-        exit()
+        os.system("mv tmp" + str(self.solutionID) + ".txt fitness" + str(self.solutionID) + ".txt")
         
         
 
