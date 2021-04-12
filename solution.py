@@ -20,10 +20,10 @@ class SOLUTION:
         self.Create_Body()
         self.Create_Brain()
         os.system("python simulate.py " + directORGUI + " " + str(self.myID) + " &")
-
-    def Wait_For_Simulation_To_End(self):
         while not os.path.exists("fitness" + str(self.myID) + ".txt"):
             time.sleep(0.01)
+
+    def Wait_For_Simulation_To_End(self):
         f = open("fitness" + str(self.myID) + ".txt", "r")
         self.fitness = float(f.read())
         f.close()
