@@ -10,22 +10,30 @@ from pyrosim.neuralNetwork import NEURAL_NETWORK
 
 class ROBOT:
 
-    # Initializer
     def __init__(self, solutionID):
+
         self.solutionID = solutionID
+
         # Simulate robot
         self.robot = p.loadURDF("body.urdf")
         pyrosim.Prepare_To_Simulate("body.urdf")
+
+        # Call prepare to sense and act methods
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
+
+        # Call neural network constructor and create instance of it for that solution
         self.nn = NEURAL_NETWORK("brain" +str(self.solutionID)+ ".nndf")
+
+        # Delete brain.nndf file for that solution
         os.system("rm brain" +str(self.solutionID)+ ".nndf")
 
-    # Create dictionary of sensors
     def Prepare_To_Sense(self):
+
+        # Create empty dictionary of sensors
         self.sensors = {}
         for linkName in pyrosim.linkNamesToIndices:
-            # Create sensor for each link
+            # Create sensor for each link by calling sensor constructor
             self.sensors[linkName] = SENSOR(linkName)
 
     # Get sensor values for each sensor
@@ -33,10 +41,12 @@ class ROBOT:
         for i in self.sensors:
             self.sensors[i].Get_Value(x)
 
-    # Create dictionary of motors
     def Prepare_To_Act(self):
+
+        # Create empty dictionary of motors
         self.motors = {}
         for jointName in pyrosim.jointNamesToIndices:
+            # Call Motor constructor to create motor instance for each joint
             self.motors[jointName] = MOTOR(jointName)
         
     def Act(self, x):
@@ -52,12 +62,16 @@ class ROBOT:
         self.nn.Print()
 
     def Get_Fitness(self):
-        stateOfLinkZero = p.getLinkState(self.robot,0)
-        positionOfLinkZero = stateOfLinkZero[0]
-        xCoordinateOfLinkZero = positionOfLinkZero[0]
-        print(xCoordinateOfLinkZero)
+
+        # Get base position and orientation 
+        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot)
+        # Get base position
+        basePosition = basePositionAndOrientation[0]
+        # Get z coordinate of base postiion
+        zCoordinateOfLinkZero = basePosition[2]
+        print(zCoordinateOfLinkZero)
         f = open("tmp" + str(self.solutionID) + ".txt","w")
-        f.write(str(xCoordinateOfLinkZero))
+        f.write(str(zCoordinateOfLinkZero))
         f.close()
         os.system("mv tmp" + str(self.solutionID) + ".txt fitness" + str(self.solutionID) + ".txt")
         

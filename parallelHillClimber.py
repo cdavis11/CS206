@@ -5,17 +5,27 @@ import copy
 import time
 
 class PARALLEL_HILL_CLIMBER:
-    
+
     def __init__(self):
+        
+        # Delete any brain or fitness files existing in directory
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
+
+        # Initialize next available ID value
         self.nextAvailableID = 0
+        # Create empty parent directory
         self.parents = {}
+
         for i in range(0, c.populationSize):
+            # Create instance of Solution and set it to ith parent dict element
             self.parents[i] = SOLUTION(self.nextAvailableID)
+            # Increment next available ID
             self.nextAvailableID += 1
 
     def Evolve(self):
+
+        # Call own evaluate method
         self.Evaluate(self.parents)
         for currentGeneration in range(0,c.numberOfGenerations):
             self.Evolve_For_One_Generation()
@@ -39,8 +49,11 @@ class PARALLEL_HILL_CLIMBER:
             self.children[i].Mutate()
 
     def Evaluate(self, solutions):
+
+        # Call start simulation method for each solution in parents dict
         for i in self.parents:
             solutions[i].Start_Simulation("DIRECT")
+        # Call Wait for simulation to end method for each solution in parents dict
         for i in self.parents:
             solutions[i].Wait_For_Simulation_To_End()
 
@@ -52,14 +65,14 @@ class PARALLEL_HILL_CLIMBER:
         
     def Select(self):
         for i in self.parents:
-            if (self.parents[i].fitness > self.children[i].fitness):
+            if (self.parents[i].fitness < self.children[i].fitness):
                 self.parents[i] = self.children[i]
 
     def Show_Best(self):
-        best = self.parents[0].fitness
+        best = -1000
         bestIndex = 0
         for i in self.parents:
-            if self.parents[i].fitness < best:
+            if self.parents[i].fitness > best:
                 best = self.parents[i].fitness
                 bestIndex = i
         self.parents[bestIndex].Start_Simulation("GUI")
