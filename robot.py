@@ -68,10 +68,10 @@ class ROBOT:
         # Get base position
         basePosition = basePositionAndOrientation[0]
         # Get z coordinate of base postition
-        zCoordinateOfLinkZero = basePosition[0]
-        print(zCoordinateOfLinkZero)
+        xCoordinateOfLinkZero = basePosition[0]
+        print(xCoordinateOfLinkZero)
         f = open("tmp" + str(self.solutionID) + ".txt","w")
-        f.write(str(zCoordinateOfLinkZero))
+        f.write(str(xCoordinateOfLinkZero))
         f.close()
         os.system("mv tmp" + str(self.solutionID) + ".txt fitness" + str(self.solutionID) + ".txt")
         
