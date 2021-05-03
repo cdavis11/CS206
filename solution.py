@@ -16,10 +16,6 @@ class SOLUTION:
         #Make weights range from 1 to -1
         self.weights = self.weights *2 -1
 
-        # Create matrix of random values from 0-2 for upper and lower legs
-        self.lengths = np.random.rand(2,4)
-        self.lengths = self.lengths*2
-
     def Set_ID(self, nextAvailableID):
         self.myID = nextAvailableID
 
@@ -77,42 +73,42 @@ class SOLUTION:
         # Create Torso, back leg joint
         pyrosim.Send_Joint( name = "Torso_BackLeg" , parent= "Torso" , child = "BackLeg" , type = "revolute", position = "0 -0.5 1", jointAxis = "1 0 0")
         # Create Back Leg
-        pyrosim.Send_Cube(name="BackLeg", pos=[0, -0.5, 0] , size=[0.2, self.lengths[0,0], 0.2])
+        pyrosim.Send_Cube(name="BackLeg", pos=[0, -0.5, 0] , size=[0.2, 1, 0.2])
 
         # Create Torso, front leg joint
         pyrosim.Send_Joint( name = "Torso_FrontLeg" , parent= "Torso" , child = "FrontLeg" , type = "revolute", position = "0 0.5 1", jointAxis = "1 0 0")
         # Create Front leg
-        pyrosim.Send_Cube(name="FrontLeg", pos=[0, 0.5, 0] , size=[0.2, self.lengths[0,1], 0.2])
+        pyrosim.Send_Cube(name="FrontLeg", pos=[0, 0.5, 0] , size=[0.2, 1, 0.2])
 
         # Create Torso, left leg joint
         pyrosim.Send_Joint( name = "Torso_LeftLeg" , parent= "Torso" , child = "LeftLeg" , type = "revolute", position = "-0.5 0 1", jointAxis = "0 1 0")
         # Create Left leg
-        pyrosim.Send_Cube(name="LeftLeg", pos=[-0.5, 0, 0] , size=[self.lengths[0,2], 0.2, 0.2])
+        pyrosim.Send_Cube(name="LeftLeg", pos=[-0.5, 0, 0] , size=[1, 0.2, 0.2])
 
         # Create Torso, right leg joint
         pyrosim.Send_Joint( name = "Torso_RightLeg" , parent= "Torso" , child = "RightLeg" , type = "revolute", position = "0.5 0 1", jointAxis = "0 1 0")
         # Create Right leg
-        pyrosim.Send_Cube(name="RightLeg", pos=[0.5, 0, 0] , size=[self.lengths[0,3], 0.2, 0.2])
+        pyrosim.Send_Cube(name="RightLeg", pos=[0.5, 0, 0] , size=[1, 0.2, 0.2])
 
         # Create back leg joint
         pyrosim.Send_Joint( name = "BackLeg_LowerBackLeg" , parent= "BackLeg" , child = "LowerBackLeg" , type = "revolute", position = "0 -0.5 0", jointAxis = "1 0 0")
         # Create lower back leg
-        pyrosim.Send_Cube(name="LowerBackLeg", pos=[0, -0.5, -0.5] , size=[0.2, 0.2, self.lengths[1,0]])
+        pyrosim.Send_Cube(name="LowerBackLeg", pos=[0, -0.5, -0.5] , size=[0.2, 0.2, 1])
 
         # Create front leg joint
         pyrosim.Send_Joint( name = "FrontLeg_LowerFrontLeg" , parent= "FrontLeg" , child = "LowerFrontLeg" , type = "revolute", position = "0 0.5 0", jointAxis = "1 0 0")
         # Create lower front leg
-        pyrosim.Send_Cube(name="LowerFrontLeg", pos=[0, 0.5, -0.5] , size=[0.2, 0.2, self.lengths[1,1]])
+        pyrosim.Send_Cube(name="LowerFrontLeg", pos=[0, 0.5, -0.5] , size=[0.2, 0.2, 1])
 
         # Create right leg joint
         pyrosim.Send_Joint( name = "RightLeg_LowerRightLeg" , parent= "RightLeg" , child = "LowerRightLeg" , type = "revolute", position = "0.5 0 0", jointAxis = "0 1 0")
         # Create lower right leg
-        pyrosim.Send_Cube(name="LowerRightLeg", pos=[0.5, 0, -0.5] , size=[0.2, 0.2, self.lengths[1,2]])
+        pyrosim.Send_Cube(name="LowerRightLeg", pos=[0.5, 0, -0.5] , size=[0.2, 0.2, 1])
 
         # Create left leg joint
         pyrosim.Send_Joint( name = "LeftLeg_LowerleftLeg" , parent= "LeftLeg" , child = "LowerLeftLeg" , type = "revolute", position = "-0.5 0 0", jointAxis = "0 1 0")
         # Create lower left leg
-        pyrosim.Send_Cube(name="LowerLeftLeg", pos=[-0.5, 0, -0.5] , size=[0.2, 0.2, self.lengths[1,3]])
+        pyrosim.Send_Cube(name="LowerLeftLeg", pos=[-0.5, 0, -0.5] , size=[0.2, 0.2, 1])
 
         pyrosim.End()
 
@@ -153,8 +149,6 @@ class SOLUTION:
         randCol = random.randint(0,c.numMotorNeurons-1)
         self.weights[randRow,randCol] = random.random() * 2 - 1
 
-        randRow2 = random.randint(0,1)
-        randCol2 = random.randint(0,3)
-        self.lengths[randRow2, randCol2] = random.random() * 2
+    
         
          

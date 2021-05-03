@@ -68,7 +68,7 @@ class ROBOT:
         # Get base position
         basePosition = basePositionAndOrientation[0]
         # Get z coordinate of base postition
-        zCoordinateOfLinkZero = basePosition[0]
+        zCoordinateOfLinkZero = basePosition[2]
         print(zCoordinateOfLinkZero)
         f = open("tmp" + str(self.solutionID) + ".txt","w")
         f.write(str(zCoordinateOfLinkZero))
