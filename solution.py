@@ -34,17 +34,15 @@ class SOLUTION:
         # Create box.sdf file
         pyrosim.Start_SDF("world.sdf")
 
-        # Define box coordinates
-        x = -2
-        y = -2
-        z = 0.5
-
-        # Define box dimensions
-        length = 1
-        width = 1
-        height = 1
-
-        pyrosim.Send_Cube(name="Box", pos=[x, y, z] , size=[length, width, height])
+        pyrosim.Send_Cube(name="Box1", pos=[-2, -3, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box2", pos=[-2, 2, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box3", pos=[-2, 7, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box4", pos=[-5, -3, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box6", pos=[-5, 2, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box7", pos=[-5, 7, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box8", pos=[-7, -3, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box8", pos=[-7, 2, 0.5] , size=[1,1,1])
+        pyrosim.Send_Cube(name="Box8", pos=[-7, 7, 0.5] , size=[1,1,1])
         pyrosim.End()
 
     def Create_Body(self):
