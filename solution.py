@@ -46,6 +46,7 @@ class SOLUTION:
 
         # System call to remove that fitness file
         os.system("rm fitness" + str(self.myID) + ".txt")
+        
 
     def Create_World(self):
 

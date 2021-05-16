@@ -3,6 +3,7 @@ import constants as c
 import os
 import copy
 import time
+import numpy as np
 
 class PARALLEL_HILL_CLIMBER:
 
@@ -23,12 +24,18 @@ class PARALLEL_HILL_CLIMBER:
             # Increment next available ID
             self.nextAvailableID += 1
 
+        self.fitnessMatrix = np.zeros((c.populationSize, c.numberOfGenerations))
+
     def Evolve(self):
 
         # Call own evaluate method
         self.Evaluate(self.parents)
         for currentGeneration in range(0,c.numberOfGenerations):
             self.Evolve_For_One_Generation()
+            for i in self.parents:
+                self.fitnessMatrix[i,currentGeneration] = self.parents[i].fitness
+                
+        
 
     def Evolve_For_One_Generation(self):
         self.Spawn()
